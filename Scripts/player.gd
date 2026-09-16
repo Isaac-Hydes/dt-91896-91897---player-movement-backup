@@ -27,6 +27,7 @@ var fall_start_y: float = 0.0
 
 # This is the script for the stars for the stars collected variables. 
 const star_code = preload("res://Scripts/star_code.gd")
+const spike_code = preload("res://Scripts/spike_code.gd")
 # This is the score for the stars collection. It increases as the player collects stars. 
 var score = 0
 
@@ -84,7 +85,7 @@ func update_movement(_delta: float) -> void:
 	if !Input.is_action_just_pressed("jump_") and is_on_floor():
 		jump_buffer_timer.start()
 		coyote_timer.start()
-		fall_damage_timer.stop()
+		#fall_damage_timer.stop()
 		jump_count = 0
 		
 		
@@ -119,7 +120,7 @@ func update_states() -> void:
 				current_state = State.WALK
 			
 
-# This flips the player animation from left to right depending on the direction that the player is moving.
+# This flips the player animation from left to right depending on the direction that the player is moving .
 func update_animation() -> void:
 	if velocity.x != 0:
 		animations.scale.x = sign(velocity.x)		
@@ -154,13 +155,10 @@ func lives_ui() -> void:
 		life_3.hide()
 	if lives == 1:
 		life_2.hide()
-	if lives == 0:
+	if lives <= 0:
 		life_1.hide()
 		get_tree().paused = true
 
 func _on_void_body_entered(body: Node2D) -> void:
 	if body.name == 'player':
-		while true:
-			lives -= 1
-
-		
+			lives -= 3
