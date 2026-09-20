@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://co4wn3qbxqu8t"]
+
+[ext_resource type="Texture2D" uid="uid://bcfhlnobqi8ep" path="res://New Piskel (16).png" id="1_526ql"]
+[ext_resource type="Script" uid="uid://bwwoqtciamdhk" path="res://jump_pad.gd" id="1_cysje"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cysje"]
+radius = 30.5
+height = 155.0
+
+[node name="Jump Pad" type="Area2D"]
+script = ExtResource("1_cysje")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 0.2)
+shape = SubResource("CapsuleShape2D_cysje")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_526ql")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered_jump"]
