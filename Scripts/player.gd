@@ -7,9 +7,7 @@ extends CharacterBody2D
 @export var gravity: int = speed * 1.8
 @export var down_gravity: float = 2
 @onready var animations: AnimatedSprite2D = $AnimatedSprite2D
-@onready var jump_buffer_timer: Timer = $JumpBufferTimer
 @onready var coyote_timer: Timer = $CoyoteTimer
-@onready var fall_damage_timer: Timer = $"Fall Damage Timer"
 
 @onready var star_1: Sprite2D = $"Star--1"
 @onready var star_2: Sprite2D = $"Star--2"
@@ -20,9 +18,9 @@ extends CharacterBody2D
 @onready var life_2: Sprite2D = $"Life-2"
 @onready var life_1: Sprite2D = $"Life-1"
 
-const fall_damage_height: float = 1.0
-var was_in_air: bool = false
-var fall_start_y: float = 0.0
+#const fall_damage_height: float = 1.0
+#var was_in_air: bool = false
+#var fall_start_y: float = 0.0
 
 
 # This is the script for the stars for the stars collected variables. 
@@ -70,22 +68,17 @@ func update_movement(_delta: float) -> void:
 		velocity.y = jump_speed
 		current_state = State.JUMP
 		jump_count = 2
-		fall_damage_timer.start()
-
 		
 	# The first jump
-	if (Input.is_action_just_pressed("jump_")) and coyote_timer.time_left > 0 and jump_buffer_timer.time_left > 0:
+	if (Input.is_action_just_pressed("jump_")) and coyote_timer.time_left > 0:
 		velocity.y = jump_speed
 		current_state = State.JUMP
-		jump_buffer_timer.stop()
 		coyote_timer.stop()
 		jump_count = 1
 		
 	# When on the ground as part of the jumping code. 
 	if !Input.is_action_just_pressed("jump_") and is_on_floor():
-		jump_buffer_timer.start()
 		coyote_timer.start()
-		#fall_damage_timer.stop()
 		jump_count = 0
 		
 		
