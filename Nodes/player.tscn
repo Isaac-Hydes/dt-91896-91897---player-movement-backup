@@ -246,10 +246,6 @@ sprite_frames = SubResource("SpriteFrames_dw050")
 animation = &"idle"
 frame_progress = 0.6979456
 
-[node name="JumpBufferTimer" type="Timer" parent="."]
-wait_time = 0.15
-one_shot = true
-
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.15
 one_shot = true

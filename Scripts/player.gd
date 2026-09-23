@@ -18,10 +18,6 @@ extends CharacterBody2D
 @onready var life_2: Sprite2D = $"Life-2"
 @onready var life_1: Sprite2D = $"Life-1"
 
-#const fall_damage_height: float = 1.0
-#var was_in_air: bool = false
-#var fall_start_y: float = 0.0
-
 
 # This is the script for the stars for the stars collected variables. 
 const star_code = preload("res://Scripts/star_code.gd")
@@ -48,7 +44,6 @@ func _physics_process(_delta: float) -> void:
 	lives_ui()
 	lose_lives()
 	move_and_slide()
-
 
 # Direction of the Player Movement taken from player input. 
 func handle_input() -> void:
@@ -81,7 +76,6 @@ func update_movement(_delta: float) -> void:
 		coyote_timer.start()
 		jump_count = 0
 		
-		
 # The Gravitys of the Player
 	# The gravity of the player
 	if current_state == State.JUMP:
@@ -112,7 +106,6 @@ func update_states() -> void:
 			else:
 				current_state = State.WALK
 			
-
 # This flips the player animation from left to right depending on the direction that the player is moving .
 func update_animation() -> void:
 	if velocity.x != 0:
@@ -137,17 +130,20 @@ func stars_collection() -> void:
 	if score == 5:
 		star_5.show()
 
-
 func lose_lives() -> void:
 	if velocity.length() > 1000:
 		velocity.y = -100
 		lives -= 1
 		
 func lives_ui() -> void:
+	if lives == 3:
+		life_3.show()
 	if lives == 2:
 		life_3.hide()
+		life_2.show()
 	if lives == 1:
 		life_2.hide()
+		life_1.show()
 	if lives <= 0:
 		life_1.hide()
 		get_tree().paused = true

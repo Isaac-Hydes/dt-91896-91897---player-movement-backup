@@ -2,7 +2,6 @@ extends Area2D
 
 @onready var jump_allow: CollisionShape2D = $"../StaticBody2D/CollisionShape2D"
 
-
 func _on_body_entered_jump(body: Node2D) -> void:
 	if body.name == 'player':
 		if body.velocity.y > 250:
