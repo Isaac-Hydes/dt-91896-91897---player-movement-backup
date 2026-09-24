@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://cxkt7kma0luc6"]
+[gd_scene load_steps=13 format=4 uid="uid://cxkt7kma0luc6"]
 
 [ext_resource type="PackedScene" uid="uid://dnuy37lui6atb" path="res://Nodes/player.tscn" id="1_ilw62"]
 [ext_resource type="Texture2D" uid="uid://bjdyg2kjnade2" path="res://brackeys_platformer_assets/sprites/world_tileset.png" id="2_j3wwd"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://xdn373h5vywt" path="res://spike.tscn" id="6_ueiic"]
 [ext_resource type="PackedScene" uid="uid://co4wn3qbxqu8t" path="res://jump_pad.tscn" id="7_4vh4w"]
 [ext_resource type="PackedScene" uid="uid://bqib2nc5tmcyc" path="res://life_mushroom.tscn" id="8_40obl"]
+[ext_resource type="PackedScene" uid="uid://blxghv0g6sd4l" path="res://speed_mushroom.tscn" id="8_dsslj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aqk2v"]
 texture = ExtResource("2_j3wwd")
@@ -729,9 +730,12 @@ scale = Vector2(0.5, 0.5)
 position = Vector2(213, -16)
 
 [node name="Life Mushroom 1" parent="." instance=ExtResource("8_40obl")]
-position = Vector2(702, -58)
+position = Vector2(807, -231)
 
 [node name="Life Mushroom 2" parent="." instance=ExtResource("8_40obl")]
 position = Vector2(3063, -1030)
+
+[node name="speed_mushroom" parent="." instance=ExtResource("8_dsslj")]
+position = Vector2(2023, -1032)
 
 [connection signal="body_entered" from="void" to="player" method="_on_void_body_entered"]
