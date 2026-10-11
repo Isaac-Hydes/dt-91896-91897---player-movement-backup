@@ -9,6 +9,7 @@ extends CharacterBody2D
 @onready var animations: AnimatedSprite2D = $AnimatedSprite2D
 @onready var coyote_timer: Timer = $CoyoteTimer
 
+#These are the UI variables for stars and lives
 @onready var star_1: Sprite2D = $"Star--1"
 @onready var star_2: Sprite2D = $"Star--2"
 @onready var star_3: Sprite2D = $"Star--3"
@@ -88,26 +89,28 @@ func update_movement(_delta: float) -> void:
 # Updates and Changes the States of the player from different circumstances. 
 func update_states() -> void:
 	match current_state:
+		# When the player is changing from an Idle State
 		State.IDLE when velocity.x != 0:
 			current_state = State.WALK
-	
+		# When the player is changing from a Walking State
 		State.WALK:
 			if velocity.x == 0:
 				current_state = State.IDLE 
 			if not is_on_floor() && velocity.y > 0:
 				current_state = State.DOWN
-		
+		# When the player is changing from a Jumping State
 		State.JUMP when velocity.y > 0:
 			current_state = State.DOWN
-			
+		# When the player is changing from a Dowm State
 		State.DOWN when is_on_floor():
 			if velocity.x == 0:
 				current_state = State.IDLE
 			else:
 				current_state = State.WALK
-			
-# This flips the player animation from left to right depending on the direction that the player is moving .
+
+# This is where the changes to the animations are made, either inverted, or when states change.
 func update_animation() -> void:
+# This flips the player animation from left to right depending on the direction that the player is moving .
 	if velocity.x != 0:
 		animations.scale.x = sign(velocity.x)		
 	
@@ -117,8 +120,10 @@ func update_animation() -> void:
 		State.WALK: animations.play("run")
 		State.JUMP: animations.play("death")
 		State.DOWN: animations.play("loselife")
-	
+
+# This is the stars score and collection system. 
 func stars_collection() -> void:
+	# When the score increses, another star will show. 
 	if score == 1:
 		star_1.show()
 	if score == 2:
@@ -130,12 +135,16 @@ func stars_collection() -> void:
 	if score == 5:
 		star_5.show()
 
+# This is the fall damage of the player
 func lose_lives() -> void:
+	# If the velocity is too fast, the player will lose a life, and the velocity changes directions slightly. 
 	if velocity.length() > 1000:
 		velocity.y = -100
 		lives -= 1
 		
+# This is the UI for the player losing lives
 func lives_ui() -> void:
+	# If the player loses a life, a heart disappears. If a player gains a life, a heart appears.
 	if lives == 3:
 		life_3.show()
 	if lives == 2:
@@ -148,6 +157,7 @@ func lives_ui() -> void:
 		life_1.hide()
 		get_tree().paused = true
 
+# This is the void where the player dies upon entry.
 func _on_void_body_entered(body: Node2D) -> void:
 	if body.name == 'player':
-			lives -= 3
+			lives = 0
