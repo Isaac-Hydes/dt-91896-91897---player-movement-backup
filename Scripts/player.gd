@@ -160,4 +160,7 @@ func lives_ui() -> void:
 # This is the void where the player dies upon entry.
 func _on_void_body_entered(body: Node2D) -> void:
 	if body.name == 'player':
-			lives = 0
+		life_3.hide()
+		life_2.hide()
+		life_1.hide()
+		lives = 0
