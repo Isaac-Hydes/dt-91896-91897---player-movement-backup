@@ -3,8 +3,8 @@ extends CharacterBody2D
 #These are the variables for the code that can be changed.
 @export var speed: int = 180
 @export var acceleration: int = 20
-@export var jump_speed: int = -speed 
-@export var gravity: int = speed * 1.8
+@export var jump_speed: int = -180 
+@export var gravity: int = 324
 @export var down_gravity: float = 2
 @onready var animations: AnimatedSprite2D = $AnimatedSprite2D
 @onready var coyote_timer: Timer = $CoyoteTimer
