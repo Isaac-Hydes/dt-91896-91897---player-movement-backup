@@ -118,8 +118,8 @@ func update_animation() -> void:
 	match current_state:
 		State.IDLE: animations.play("idle")
 		State.WALK: animations.play("run")
-		State.JUMP: animations.play("death")
-		State.DOWN: animations.play("loselife")
+		State.JUMP: animations.play("death") # This animation is just temporary, as I do not have an animation
+		State.DOWN: animations.play("loselife") # This animation is just temporary, as I do not ahve an animation
 
 # This is the stars score and collection system. 
 func stars_collection() -> void:
